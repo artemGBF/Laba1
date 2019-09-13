@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><Products><Product>Name: pektor
+ Description: dog
+ Quantity: 4
+ Price: 100.0
+ Min Order Quantity: 1
+</Product><Product>Name: fork
+ Description: a sharp metal tool
+ Quantity: 10
+ Price: 100.0
+ Min Order Quantity: 4
+</Product><Product>Name: spoon
+ Description: a metal tool
+ Quantity: 7
+ Price: 100.0
+ Min Order Quantity: 4
+</Product></Products>

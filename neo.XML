@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product>
+        <name>fork</name>
+        <description>a sharp metal tool</description>
+        <price>100</price>
+        <qtyOnHand>10</qtyOnHand>
+        <minOrderQty>4</minOrderQty>
+    </product>
+    <product>
+        <name>spoon</name>
+        <description>a metal tool</description>
+        <price>100</price>
+        <qtyOnHand>7</qtyOnHand>
+        <minOrderQty>4</minOrderQty>
+    </product>
+    <product>
+        <name>knife</name>
+        <description>a very sharp metal tool</description>
+        <price>200</price>
+        <qtyOnHand>1</qtyOnHand>
+        <minOrderQty>4</minOrderQty>
+    </product>
+</products>
