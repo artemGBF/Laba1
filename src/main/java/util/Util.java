@@ -1,8 +1,8 @@
 package util;
 
 
+import javafx.util.Pair;
 import org.apache.commons.cli.*;
-import util.PrintHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Util {
-    public static CommandLine start(String[] mass) throws ParseException, IOException {
+    public static Pair<CommandLine, Options> start(String[] mass) throws ParseException, IOException {
         Option option1 = new Option("f", "input", true, "input data");
         option1.setArgs(1);
         option1.setOptionalArg(false);
@@ -47,26 +47,29 @@ public class Util {
         options.addOption(option5);
         CommandLineParser commandLineParser = new DefaultParser();
         CommandLine commandLine = commandLineParser.parse(options, mass);
-        return commandLine;
+        Pair<CommandLine, Options> pair = new Pair<>(commandLine, options);
+        return pair;
     }
 
-    /*public static void interactiveMode(CommandLine commandLine) throws IOException {
-        while (!commandLine.hasOption("exit")) {
-            if (commandLine.hasOption("f")) {
-                String f = commandLine.getOptionValue("f");
-                String[] s = f.split("//");
-                for (int i = 0; i < s.length; i++) {
-                    try (InputStream is = Files.newInputStream(Paths.get(s[i]))) {
-                        String md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(is);
-                        String sha256 = org.apache.commons.codec.digest.DigestUtils.sha256Hex(is);
-                        System.out.println(md5 + "It is md5");
-                        System.out.println(sha256 + "It is sha256");
-                    }
-                }
-            }
-
+    public static boolean interactiveMode(String mass) throws IOException {
+        int p = 0;
+        if (mass.charAt(0) == '-') {
+            p = 1;
         }
-    }*/
+        String[] s = mass.split(" ");
+        if (s[0].equals("-exit"))
+            return false;
+        for (int i = p; i < s.length; i++) {
+            try (InputStream is = Files.newInputStream(Paths.get(s[i]))) {
+                String md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(is);
+                String sha256 = org.apache.commons.codec.digest.DigestUtils.sha256Hex(is);
+                System.out.println(md5 + "...It is md5 for "+Paths.get(s[i]));
+                System.out.println(sha256 + "...It is sha256 for "+Paths.get(s[i])+"\n");
+            }
+        }
+        return true;
+    }
+
 
     public static void sha256Mode(CommandLine commandLine) throws IOException {
         if (commandLine.hasOption("f")) {
@@ -75,7 +78,7 @@ public class Util {
             for (int i = 0; i < s.length; i++) {
                 try (InputStream is = Files.newInputStream(Paths.get(s[i]))) {
                     String sha256 = org.apache.commons.codec.digest.DigestUtils.sha256Hex(is);
-                    System.out.println(sha256 + "It is sha256");
+                    System.out.println(sha256 + "It is sha256"+"\n");
                 }
             }
         }
@@ -88,7 +91,7 @@ public class Util {
             for (int i = 0; i < s.length; i++) {
                 try (InputStream is = Files.newInputStream(Paths.get(s[i]))) {
                     String md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(is);
-                    System.out.println(md5 + "It is md5");
+                    System.out.println(md5 + "It is md5"+"\n");
                 }
             }
         }

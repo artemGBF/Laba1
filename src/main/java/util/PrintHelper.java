@@ -1,10 +1,12 @@
 package util;
 
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 public class PrintHelper {
     public void printHelp(
