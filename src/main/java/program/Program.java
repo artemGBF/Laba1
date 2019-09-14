@@ -1,34 +1,31 @@
 package program;
 
-import org.apache.commons.cli.AlreadySelectedException;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.ParseException;
+import javafx.util.Pair;
+import org.apache.commons.cli.*;
 import util.PrintHelper;
 import util.Util;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
         try {
+            Pair<CommandLine, Options> start = Util.start(args);
             Scanner scanner = new Scanner(System.in);
-            CommandLine commandLine = Util.start(args).getKey();
+            CommandLine commandLine = start.getKey();
             if (commandLine.hasOption("i")) {
-                if (commandLine.hasOption("f")) {
-                    String f = commandLine.getOptionValue("f");
                     while (true) {
-                        boolean b = Util.interactiveMode(f);
+                        boolean b = Util.interactiveMode(commandLine);
                         if (!b) {
-                            System.out.println("finished\n");
+                            System.out.println("\nfinished");
                             break;
                         }
-                        f = scanner.nextLine();
+                        CommandLineParser commandLineParser = new DefaultParser();
+                        String[] g = scanner.nextLine().split(" ");
+                        commandLine = commandLineParser.parse(start.getValue(), g);
                     }
-                }
             }
             if (commandLine.hasOption("sha256")) {
                 Util.sha256Mode(commandLine);
@@ -38,7 +35,7 @@ public class Program {
             }
             if(commandLine.hasOption("help")){
                 new PrintHelper().printHelp(
-                        Util.start(args).getValue(), // опции по которым составляем help
+                        start.getValue(), // опции по которым составляем help
                         80, // ширина строки вывода
                         "Options", // строка предшествующая выводу
                         "-- HELP --", // строка следующая за выводом
