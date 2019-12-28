@@ -42,6 +42,7 @@ public class Util {
         group.addOption(option2);
         group.addOption(option3);
         group.addOption(option4);
+
         options.addOptionGroup(group);
 
         options.addOption(option5);
