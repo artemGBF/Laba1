@@ -68,21 +68,7 @@ public class Util {
             }
         }
         return true;
-    }
-
-
-    public static void sha256Mode(CommandLine commandLine) throws IOException {
-        if (commandLine.hasOption("f")) {
-            String f = commandLine.getOptionValue("f");
-            String[] s = f.split(";");
-            for (int i = 0; i < s.length; i++) {
-                try (InputStream is = Files.newInputStream(Paths.get(s[i]))) {
-                    String sha256 = org.apache.commons.codec.digest.DigestUtils.sha256Hex(is);
-                    System.out.println(sha256 + "...It is sha256"+"\n");
-                }
-            }
-        }
-    }
+    }git
 
     public static void md5Mode(CommandLine commandLine) throws IOException {
         if (commandLine.hasOption("f")) {
