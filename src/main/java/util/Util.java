@@ -68,7 +68,7 @@ public class Util {
             }
         }
         return true;
-    }git
+    }
 
     public static void md5Mode(CommandLine commandLine) throws IOException {
         if (commandLine.hasOption("f")) {
