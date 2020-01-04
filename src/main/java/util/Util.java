@@ -42,6 +42,7 @@ public class Util {
         group.addOption(option2);
         group.addOption(option3);
         group.addOption(option4);
+
         options.addOptionGroup(group);
 
         options.addOption(option5);
@@ -67,20 +68,6 @@ public class Util {
             }
         }
         return true;
-    }
-
-
-    public static void sha256Mode(CommandLine commandLine) throws IOException {
-        if (commandLine.hasOption("f")) {
-            String f = commandLine.getOptionValue("f");
-            String[] s = f.split(";");
-            for (int i = 0; i < s.length; i++) {
-                try (InputStream is = Files.newInputStream(Paths.get(s[i]))) {
-                    String sha256 = org.apache.commons.codec.digest.DigestUtils.sha256Hex(is);
-                    System.out.println(sha256 + "...It is sha256"+"\n");
-                }
-            }
-        }
     }
 
     public static void md5Mode(CommandLine commandLine) throws IOException {
